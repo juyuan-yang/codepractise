@@ -1,0 +1,67 @@
+11.1
+
+// assume A and B are both in ascending order
+int[] mergeTwoArrays(int[] arrayA, int[] arrayB, int sizeA, int sizeB){
+	if(sizeA + sizeB > arrayA.length){
+		System.out.println("Failed, because A doesn't have enough space to hold B");
+		return;
+	}
+	int indexA = sizeA - 1;
+	int indexB = sizeB - 1;
+	int current = sizeA + sizeB - 1;
+	while(indexA >= 0 && indexB >= 0){
+		if(arrayA[indexA] > arrayB[indexB]){
+			arrayA[current--] = arrayA[indexA--];
+		} else {
+			arrayA[current--] = arrayB[indexB--];
+		}
+	}
+	while(indexB >= 0){
+		arrayA[current--] = arrayB[indexB--];
+	}
+	return arrayA;
+}
+
+11.2
+
+String[] sortArray(String[] orig){
+	int index = 0;
+	for(int i = 0; i < orig.length; i++){
+		if(isAnagram(orig[i])){
+			String temp = orig[i];
+			orig[i] = orig[index]; 
+			orig[index++] = temp;
+			//swap(orig, index++, i);
+		}
+	}
+	return orig;
+}
+
+boolean isAnagram(String str){
+	for(int i = 0; i < str.length/2; i++){
+		if(str[i] != str[str.length - 1 - i])
+			return false;
+	}
+	return true;
+}
+
+11.3
+
+// As the sorted array is rotated an unknown number, we don't know what it is like then. It's better to just scan the array to find the target number, the cost is not so bad.
+
+int findIndex(int[] array, int target){
+	for(int i = 0; i < array.length; i++){
+		if(array[i] == target) return i;
+	}
+	return -1;
+}
+
+11.4
+
+Seperate 20 GB file into several parts, and then read one by one into memory, sort them and save in an file. Then use merge sort to sort, will combine those files into a final sorted file.
+
+11.5
+
+For only one query, just scan the array and output.
+For multiple queries, we can first eliminate the empty strings, map the original index to the current index, and then perform the linear searching.
+

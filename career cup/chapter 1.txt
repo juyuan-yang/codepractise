@@ -1,0 +1,217 @@
+1.1
+
+If all the characters are unicode? then we could use an array to indicate whether each character appears before.
+public boolean allUniq(String str){
+	int siez = 256;
+	boolean[] appear = new boolean[size];
+	
+	for(int i = 0; i < str.length; i++){
+		if(str.get(i) < 256 && str.get(i) >= 0){
+			if(appear[str.get(i)]){
+				return false;
+			}
+			appear[str.get(i)] = true;
+		} else {
+			throw new Exception("unknown character");
+		}
+	}
+	
+	return true;
+}
+
+we could also sort the array, then perform a linear check to see if there are same characters next to each other.
+
+if no additional data structures, we can also sort the string inside the string(neex one extra char), 
+sor we could only use a simple iteration check, with time complexity to be O(n^2)
+
+public boolean allUniq(string str){
+	for(int i = 0 ; i < str.length; i++){
+		for(int j = i + 1; j < str.length; j++){
+			if(str.get(i) == str.get(j)) return false;
+		}
+	}
+}
+
+1.2
+
+public char* reverse(char* str){
+	if(str[0] == null) return null;
+	
+	int total = 0;	
+	while(str[total] != '\n') total++;
+	
+	char* newStr = new char[total];
+	char* start = newStr;
+	
+	while(total > 0){
+		newStr[0] = str[--total];
+		newStr++;
+	}
+	return start;
+}
+
+1.3
+
+the key point is to check whether they have exactly the same chacrcters
+
+if the strings are all unicode, then we could use an integer array, which will record how many times does each character appear in the array.
+
+public boolean ifPermut(String first, String secod){
+	int size = 256;
+	int[] appear = new int[size];
+	
+	for(int i = 0; i < first.length; i++){
+		if(first.get(i) < 256 && first.get(i) >= 0){
+			appear[first.get(i)]++;
+		} else {
+			throw new Exception("unknown character");
+		}
+	}
+	
+	for(int i = 0; i < secod.length; i++){
+		if(secod.get(i) < 256 && secod.get(i) >= 0){
+			appear[secod.get(i)]--;
+			if(appear[secod.get(i)] < 0) return false;
+		} else {
+			throw new Exception("unknown character");
+		}
+	}
+	
+	return true;
+}
+
+1.4
+
+public char[] replace(char[] str, int befSize){
+	if(befSize == 0) return str;
+	
+	while(str[befSize - 1] == ' ' && befSize > 0) str--;
+	
+	int total = 0;
+	int aftSize;
+	for(int i = 0; i < befSize; i++)
+		if(str[i] == ' ') total++;	
+	aftSize = befSize + total * 2;
+	
+	for(int i = befSize - 1; i >= 0; i--){
+		if(str[i] != ' '){
+			str[--aftSize] = atr[i];
+		} else {
+			str[--aftSize] = '0';
+			str[--aftSize] = '2';
+			str[--aftSize] = '%';
+		}
+	}
+	
+	return str;
+}
+
+1.5
+
+public String StrCompres(String orig){
+	if(orig.length() == 0) return orig;
+
+	StringBuffer sb = new StringBuffer();
+	int pivot = 0, i;
+	sb.append(orig.get(0));
+	
+	for(i = 1; i < orig.length; i++){
+		if(orig.get(i) != orig.get(pivot)){
+			sb.append(i - pivot);
+			sb.append(orig.get(i));
+			pivot = i;
+		}
+	}
+	sb.append(i - pivot);
+	
+	return sb.toString();
+}
+
+1.6
+
+Perform the exchange one by one, following a simple rule.
+
+public int[][] Rotate(int[][] pixels, int n){
+	int temp;
+	for(int i = 0; i < n / 2; i++){
+		for(int j = i; j < n - 1 - i; j++){
+			temp = pixels[i][j];
+			pixels[i][j] = pixels[n - 1 - j][i];
+			pixels[n - 1 - j][i] = pixels[n - 1 - i][n - 1 - j];
+			pixels[n - 1 - i][n - 1 - j] = pixels[n - j - 1][i];
+			pixels[n - 1 - j][i] = temp;
+		}
+	}
+	return pixels;
+}
+
+1.7
+
+firstly we check each item, if zero then mark corresponding line and column. After the checking, we set the whole array together
+
+public int[][] setZero(int[][] array, int m, int n){
+	boolean[] line = new boolean[m];
+	boolean[] column = new boolean[n];
+
+	for(int i = 0; i < m; i++){
+		for(int j = 0; j < n; j++){
+			if(array[i][j] == 0){
+				line[i] = true;
+				column[j] = true;
+			}
+		}
+	}
+	
+	int res[][] = new int[m][n];
+	for(int i = 0; i < m; i++){
+		for(int j = 0; j < n; j++){
+			if(line[i] || column[j]){
+				res[i][j] = 0;
+			} else
+				res[i][j] = array[i][j];
+		}
+	}
+	
+	return res;
+}
+
+1.8
+
+split one string at each index, and see whether both the substring is subString of another string
+
+public boolean isRotation(String s1, String s2){
+	if(s2.isSubstring(s1)) return true;
+	
+	StringBuffer sb = new StringBuffer();
+	for(int i = 0; i < s1.length; i++){
+		sb.append(s1.get(i));
+		if(s2.isSubstring(sb.toString())){
+			StringBuffer temp = new StringBuffer();
+			for(int j = i + 1; j < s1.length; j++){
+				temp.append(s1.get(j));
+			}
+			if(s2.isSubstring(s1)) return true;
+		}
+	}
+	
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
