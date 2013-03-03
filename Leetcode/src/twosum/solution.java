@@ -72,5 +72,6 @@ public class solution {
     	pos[i] = prepos;
     	if(s < i - 1) quicksort(nums, s, i - 1, pos);
     	if(i + 1 < t) quicksort(nums, i + 1, t, pos);
+    	
     }
 }
