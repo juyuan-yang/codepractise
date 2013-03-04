@@ -26,7 +26,7 @@ package PopulateNextRightNode2;
 
 // A perfect and elegant solution: 
 // http://discuss.leetcode.com/questions/282/populating-next-right-pointers-in-each-node-ii
-
+// Key point: for current level, reuse the next chain from previous level
 public class Solution {
 	public static void main(String[] args) {
 		
