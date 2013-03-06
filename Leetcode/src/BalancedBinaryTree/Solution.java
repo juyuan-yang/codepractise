@@ -8,8 +8,6 @@ in which the depth of the two subtrees of every node never differ by more than 1
 
 package BalancedBinaryTree;
 
-import javax.sound.sampled.Mixer;
-
 public class Solution {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
