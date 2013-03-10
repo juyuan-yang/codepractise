@@ -26,6 +26,12 @@ public class Solution {
     ArrayList<ArrayList<Integer>> pairs; // to record [start, end] palindrome pairs
     String s;
     
+    /*
+     * http://www.mitbbs.com/article_t/JobHunting/32344595.html
+     * My solution is too long and looks like a shit,
+     * There is an elegant way to implement the same idea, see the reference
+     * Let me rewrite the code later, maybe in the second iteration >.<
+     */
     public int minCut(String s) {
         pairs = new ArrayList<ArrayList<Integer>>(s.length());
         this.s = s;
