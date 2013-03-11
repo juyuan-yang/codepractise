@@ -18,6 +18,10 @@ public class Problem8 {
 		}
 		return false;
 	}
+	
+	public static boolean isSubstring(String str1, String str2){
+		return true;
+	}
 
 	/**
 	 * @param args
