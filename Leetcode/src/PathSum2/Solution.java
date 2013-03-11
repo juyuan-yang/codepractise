@@ -49,7 +49,7 @@ public class Solution {
 	
 	public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
 		this.res = new ArrayList<ArrayList<Integer>>();
-		this.visited = new int[100];
+		this.visited = new int[1000];
         this.sum = sum;
         this.root = root;
         
