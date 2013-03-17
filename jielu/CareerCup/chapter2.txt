@@ -1,0 +1,284 @@
+2.1 Remove duplicates from an unsorted linked list
+class Node{
+	public Node next=null;
+	public int data;
+
+	public Node(int d){
+	   data = d;
+	}
+}
+
+public static Node removeDup(Node head){
+		HashSet<Integer> hashset = new HashSet<Integer>();
+
+		Node pre = head;
+		Node cur = head;
+		while(cur != null){
+		   if(hashset.contains(cur.data)){
+	          pre.next = cur.next;
+		   }else{
+		      hashset.add(cur.data);
+		       pre=cur;
+		   }
+		  
+		   cur = cur.next;
+		}
+
+		return head;
+
+
+	}
+
+2.1 Followup: Remove duplicates from an unsorted linked list without a termporary buffer.
+public static Node removeDup(Node head){
+	Node node = head;
+
+	while(node!=null){
+	   Node previous = node;
+	   Node cur = node.next;
+	   while(cur!=null){
+	      if(cur.data == node.data){
+	         previous.next = cur.next;
+	      }else{
+	         previous = cur;
+	      }
+	      cur = cur.next;
+	   }
+	   node = node.next;
+
+	}
+
+	return head;
+}
+
+2.2 Implement an algorithm to find the kth to last element of a singly linked list
+public static Node findKthNode(Node head, int k){
+    if(head == null)
+       return null;
+
+	Node first = head;
+	Node last = head.next;
+    int count = 1;
+    while(last!=null && count < k){
+       last = last.next;
+       count ++;
+    }
+
+    if(count < k)
+      return null;
+
+    while(last.next != null){
+        last = last.next;
+        first = first.next;
+
+    }
+     
+
+    return first;
+}
+
+2.3 Delete a node in the middle of a singly linked list, given only access to that node.
+public static void delete(Node node){
+	Node n = node.next;
+	node.data = n.data;
+	node.next = n.next;
+
+}
+
+2.4 Paritition a linked list around value x
+	public static Node partition(Node head, int x){
+		if(head != null){
+		   Node previous = head;
+		   Node current = head;
+
+		   while(current !=null){
+		      if(current.data < x && current != head){
+		        
+		            previous.next = current.next;
+		            current.next = head;
+		            head = current;
+		         
+		      }else{
+		         previous = current;
+		      }
+
+		      current = previous.next;
+		   }
+
+		}
+		return head;
+
+	}
+
+2.5 Add two number represented by linkedlist in reversed order
+public static Node add(Node num1, Node num2){
+		Node head =null;
+		Node current = null;
+		int extra = 0;
+		int sum = 0;
+
+	    while(num1 != null && num2 != null){
+	       sum = num1.data + num2.data + extra;
+	       Node newNode = new Node(sum % 10);
+	       if(current == null){
+	          current = newNode;
+	          head = current;
+	       }else{
+	          current.next = newNode;
+	          current = newNode;
+	       }
+	       
+	       extra = sum / 10;
+	       num1 = num1.next;
+	       num2 = num2.next;
+	    }
+
+	    while(num1 != null){
+	       sum = num1.data + extra;
+	       Node newNode = new Node(sum % 10);
+	      if(current == null){
+	          current = newNode;
+	          head = current;
+	       }else{
+	          current.next = newNode;
+	          current = newNode;
+	       }
+	       extra = sum / 10;
+	       num1 = num1.next;
+	    }
+
+	    while(num2 != null){
+	       sum = num2.data + extra;
+	       Node newNode = new Node(sum % 10);
+	      if(current == null){
+	          current = newNode;
+	          head = current;
+	       }else{
+	          current.next = newNode;
+	          current = newNode;
+	       }
+	       extra = sum / 10;
+	       num2 = num2.next;
+	    }
+
+	    if(extra > 0){
+	      Node newNode = new Node(extra);
+	      current.next = newNode;
+
+	    }
+
+	    return head;
+	}
+
+
+2.5 Follow up: the digits are stored in forward order.
+public static Node reverse(Node head){
+	Node previous = null;
+	Node current = head;
+
+	while(current != null){
+	  Node next = current.next;
+	  current.next = previous;
+	  previous = current;
+	  current = next;
+	}
+
+	return previous;
+}
+
+public static Node add(Node num1, Node num2){
+        num1 = reverse(num1);
+        num2 = reverse(num2);
+
+		Node current = null;
+		int extra = 0;
+		int sum = 0;
+
+	    while(num1 != null && num2 != null){
+	       sum = num1.data + num2.data + extra;
+	       Node newNode = new Node(sum % 10);
+	       newNode.next = current;
+	       current = newNode;
+	       
+	       extra = sum / 10;
+	       num1 = num1.next;
+	       num2 = num2.next;
+	    }
+
+	    while(num1 != null){
+	       sum = num1.data + extra;
+	       Node newNode = new Node(sum % 10);
+	       newNode.next = current;
+	       current = newNode;
+	       extra = sum / 10;
+	       num1 = num1.next;
+	    }
+
+	    while(num2 != null){
+	       sum = num2.data + extra;
+	       Node newNode = new Node(sum % 10);
+	       newNode.next = current;
+	       current = newNode;
+	       extra = sum / 10;
+	       num2 = num2.next;
+	    }
+
+	    if(extra > 0){
+	      Node newNode = new Node(extra);
+	      newNode.next = current;
+	      current = newNode;
+
+	    }
+
+	    return current;
+	}
+
+
+2.6 Return loop start
+public static Node returnLoopStart(Node head){
+	Node fast = head;
+	Node slow = head;
+
+	while(fast!=null && fast.next != null && fast != slow){
+	    slow = slow.next;
+	    fast = fast.next.next;
+	}
+
+	if(fast != slow)
+	   return null;
+
+	slow = head;
+	while(fast != slow){
+	   fast = fast.next;
+	   slow = slow.next;
+	}
+
+	return fast;
+}
+
+2.7 Implement a function to check if a linked list is a palindrome.
+public static boolean isPalindrome(Node head){
+	//Get a new reversed linked list first
+	Node current2 = null;
+	Node current = head;
+	Node fast = head;
+
+	while(current != null){
+	   Node newNode = new Node(current.data);
+	   newNode.next = current2;
+	   current2 = newNode;
+	   current = current.next;
+	}
+
+	//Compre two linked list
+	current = head;
+	while(fast != null && fast.next != null){
+	   if(current.data != current2.data)
+	      return false;
+	   current = current.next;
+	   current2 = current2.next;
+	   fast = fast.next.next;
+	}
+
+	return true;
+}

@@ -1,0 +1,157 @@
+1.2 Implement a function void reverse(char* str) in C or C++ which reverses a null-terminated string.
+void reverse(char* str){
+	char* end = str;
+	if(str){
+	while(*end != null){
+	end ++;
+	}
+
+	end--;
+
+    char temp;
+	while(str < end){
+	temp = *str;
+	*str++ = *end;
+	*end-- = temp;
+
+	}
+	}
+	
+}
+
+1.3 Given two strings, write a method to decide if one is a permutation of the other.
+public boolean isPermutation(String str1, String str2){
+	if(str1 == str2)
+	return true;
+
+	if((str1==null && str2!=null) || (str1!=null && str2==null))
+	return false;
+
+	if(str1==null && str2== null)
+	return true;
+
+	if(str1.length() != str2.length())
+	return false;
+
+	char[] array1 = str1.toCharArray();
+	char[] array2 = str2.toCharArray();
+	Arrays.sort(array1);
+	Arrays.sort(array2);
+
+	return Arrays.equals(array1, array2);
+
+}
+
+1.4 Write a method to replace all spaces in a string with '%20'
+public String replaceSpaces(char[] array, int length){
+	int spaceCount = 0;
+	int oldIndex = length -1;
+	
+	for(int i=0; i<=oldIndex; i++){
+	   if(array[i] == ' ')
+	      spaceCount++;
+	}
+
+	int newIndex = oldIndex + 2*spaceCount;
+	for(int i=oldIndex; i>=0; i--){
+	   if(array[i] == ' '){
+	      array[newIndex--] = '0';
+	      array[newIndex--] = '2';
+	      array[newIndex--] = '%';
+	   }else{
+	      array[newIndex--] = array[i];
+	   }
+	}
+
+	return new String(array);
+}
+
+1.5 Compress string by using the counts of repeated characters. "aabcccccaaa" -> "a2b1c5a3"
+	public static String compress(String str){
+	    if(str == null)
+	       return str;
+
+	    StringBuilder builder = new StringBuilder();
+	    int count = 1;
+	    int i=0;
+	    int length = str.length();
+	    for(; i<length-1; i++){
+	        if(str.charAt(i) == str.charAt(i+1)){
+	            count ++;
+	        }else{
+	        	  builder.append(str.charAt(i));
+	  	        builder.append(count);
+	  	        count = 1;
+	        }
+
+	      
+	    }
+	    builder.append(str.charAt(i));
+	    builder.append(count);
+
+	    String newStr = builder.toString();
+
+	    return newStr.length() < str.length() ? newStr : str;
+		
+	}
+
+1.6 Rotate image by 90 degrees. 
+public static int[][] rotate(int[][] matrix, int n) {
+		int temp = 0;
+		for(int row=0; row < n/2; row++){
+			int first = row;
+			int last = n -1 - row;
+			
+			for(int i=first; i<last; i++){
+				int offset = i - first;
+				//top -> temp
+				temp = matrix[first][i];
+				//left -> top
+				matrix[first][i] = matrix[last - offset][first];
+				//bottom -> left
+				matrix[last - offset][first] = matrix[last][last - offset];
+				//right -> bottom
+				matrix[last][last - offset] = matrix[i][last];
+				//top -> right
+				matrix[i][last] = temp;
+				
+				
+			}
+			
+		}
+		
+		return matrix;
+	}
+
+1.7 Write an algorithm such that if an element in an M*N matrix is 0, its entire row and column are set to 0.
+public static void setZero(int[][] matrix){
+	int rows = matrix.length;
+	int cols = matrix[0].length;
+	boolean[] row = new boolean[rows];
+	boolean[] col = new boolean[cols];
+
+	for(int i=0; i<rows; i++){
+	   for(int j=0; j<cols; j++){
+	      if(matrix[i][j] == 0){
+	         row[i] = true;
+	         col[j] = true;
+	      }
+	   }
+	}
+
+	for(int i=0; i<rows; i++){
+       for(j=0; j<cols; j++){
+          if(row[i] || col[j])
+             matrix[i][j] = 0;
+       }
+	}
+}
+
+1.8 Check whether s2 is a rotation of s1 using only one call to isSubstring api.
+public static void isRotation(String str1, String str2){
+    if((str1.length() == str2.length()) && str1.length > 0){
+      return isSubstring(str1str1, str2);
+    }
+    return false;
+	
+}

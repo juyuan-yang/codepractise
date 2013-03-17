@@ -1,0 +1,434 @@
+=====================================================
+Common:
+class TreeNode{
+	public Object data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Object data){
+    	this.data = data;
+    }
+}
+=====================================================
+Practice:
+1. in-order traverse of binary tree
+public static void inorder(TreeNode root){
+	if(root == null)
+	   return;
+
+	inorder(root.leftChild);
+	System.out.print(root.data + "  ");
+	inorder(root.rightChild);
+}
+
+2. pre-order traverse of binary tree
+public static void preorder(TreeNode root){
+	if(root == null)
+	   return;
+
+	System.out.print(root.data + "  ");
+	preorder(root.leftChild);
+	preorder(root.rightChild);
+}
+
+3. post-order traverse of binary tree
+public static void postorder(TreeNode root){
+	if(root == null)
+	   return;
+
+	postorder(root.leftChild);
+	postorder(root.rightChild);
+	System.out.print(root.data + "  ");
+}
+
+4. depth-first traverse of a binary tree, print all paths
+public static void printAllPaths(TreeNode root, String path){
+    if(root == null)
+       return;
+
+	path += "  " + root.data;
+
+    if(root.leftChild == null && root.rightChild == null)
+       System.out.println(path);
+
+    printAllPaths(root.leftChild, path);
+    printAllPaths(root.rightChild, path);
+
+}
+
+5. breadth first traverse of a binary tree, and print all nodes
+public static void BST(TreeNode root){
+	Queue<TreeNode> queue = new LinkedList<TreeNode>();
+	queue.add(root);
+
+	while(!queue.isEmpty()){
+	   TreeNode node = queue.remove();
+	   System.out.print(node.data + "  ");
+	   if(node.leftChild != null)
+	      queue.add(node.leftChild);
+
+	   if(node.rightChild != null){
+	      queue.add(node.rightChild);
+	   }
+	}
+}
+
+=====================================================
+Problem sets:
+4.2 Given a directed graph, design an algorithm to find out whether there is a route between two nodes
+class Vertex{
+	public String label;
+	public boolean isVisited;
+	public ArrayList<Vertex> next; 
+
+	public Vertex(String label){
+	   this.label = label;
+	   next = new ArrayList<Vertex>();
+	   isVisited = false;
+	}
+
+}
+
+public boolean existPath(Vertex v1, Vertex v2){
+    Queue<Vertex> queue = new LinkedList<Vertex>();
+
+    queue.add(v1);
+    while(!queue.isEmpty()){
+       Vertex v = queue.remove();
+       if(!v.isVisited){
+          if(v==v2)
+             return true;
+
+          v.isVisited = true;
+          ArrayList<Vertex> next = v.next;
+          Iterator<Vertex> it = next.iterator();
+          while(it.hasNext()){
+             Vertex node = it.next();
+             queue.add(node);
+          }
+       }
+    }
+
+    return false;
+	   
+}
+
+=====================================================
+4.3 Construct a binary search tree with minimum height given a sorted array with unique integer elements
+class TreeNode{
+	public Object data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Object data){
+    	this.data = data;
+    }
+}
+
+public static TreeNode createBST(int[] array, int start, int end){
+	    if(array==null || array.length == 0){
+	       return null;
+	    }
+	    if(start > end){
+	       return null;
+	    }
+
+		int mid = (end + start)/2;
+		TreeNode root = new TreeNode(array[mid]);
+		root.leftChild = createBST(array, start, mid -1);
+		root.rightChild = createBST(array, mid+1, end);
+		
+		return root;
+	}
+
+=====================================================
+4.4 Create a linked list of all the nodes at each depth for a given binary tree.
+class TreeNode{
+	public Object data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Object data){
+    	this.data = data;
+    }
+}
+
+class LinkedListNode{
+	public TreeNode data;
+	public LinkedListNode next;
+
+	public LinkedListNode(TreeNode data){
+	   this.data = data;
+	   next = null;
+	}
+}
+
+public static ArrayList<LinkedListNode> createLinkedList(TreeNode root){
+	if(root == null)
+	   return null;
+
+	ArrayList<LinkedListNode> list = new ArrayList<LinkedListNode>();
+	int visitedLevel = 0;
+
+	list.add(new LinkedListNode(root));
+	while(visitedLevel < list.size()){
+	   LinkedListNode node = list.get(visitedLevel);
+	   do{
+	     TreeNode data = node.data;
+	     if(data.leftChild != null){
+	        LinkedListNode newNode = new LinkedListNode(data.leftChild);
+	        addNewNode(newNode, visitedLevel+1, list);
+	     }
+
+	     if(data.rightChild != null){
+	        LinkedListNode newNode = new LinkedListNode(data.rightChild);
+	        addNewNode(newNode, visitedLevel+1, list);
+	     }
+
+	   }while( (node = node.next) != null);
+
+	   visitedLevel ++;
+	}
+
+	return list;
+}
+
+public static void addNewNode(LinkedListNode newNode, int visitingLevel, ArrayList<LinkedListNode> list){
+    if(visitingLevel == list.size()){
+       list.add(newNode);
+    }else{
+       newNode.next = list.get(visitingLevel);
+       list.set(i, newNode);
+    }
+   
+}
+
+=====================================================
+4.5 Implement a function to check if a binary tree is a binary search tree
+class TreeNode{
+	public Integer data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Integer data){
+    	this.data = data;
+    }
+}
+
+public static int last = Integer.MIN_VALUE;
+
+//Solution 1: check in-order array is sorted
+public static boolean isBST(TreeNode root){
+    if(root == null)
+       return true;
+
+    if(!isBST(root.leftChild))  return false;
+
+    if(root.data <= last) return false;
+    last = root.data;
+
+    return isBST(root.rightChild);
+}
+
+//Solution 2: Specify data range for left tree and right tree
+public static boolean isBST(TreeNode root, int min, int max){
+	if(root == null)
+	   return true;
+
+	if(root > min && root <=max){
+      if(root.leftChild != null && !isBST(root.leftChild, min, root.data)) return false;
+
+      if(root.rightChild != null && !isBST(root.rightChild, root.data, max)) return false;
+
+      return true;
+	}else{
+	  return false;
+	}
+}
+
+public static boolean isBinarySearchTree(TreeNode root){
+	return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+}
+
+=====================================================
+4.6 Find the next node (in-order successor) of a given node in a binary search tree. Assume that each node has a link to its parent.
+class TreeNode{
+	public Integer data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    public TreeNode parent;
+    
+    public TreeNode(Integer data){
+    	this.data = data;
+    }
+}
+
+//Pseduo code
+if(node has a right subtree)
+   return left most node in right subtree
+else
+   while( n.parent != null && n is the right child of its parent)
+       n = n.parent
+
+   if(n.parent == null) return null;
+
+   return n.parent;
+
+public static TreeNode findNextNode(TreeNode node){
+	if(node == null) return null;
+
+	if(node.rightChild != null){
+	   TreeNode n = node.rightChild;
+	   while(n.leftChild != null)
+	      n = n.leftChild;
+	   return n;
+	}else{
+	   TreeNode cur = node;
+	   TreeNode p = cur.parent;
+	   while(p != null && p.leftChild != cur){
+	      cur = p;
+	      p = cur.parent;
+	   }
+
+	   return p;
+	}
+}
+
+=====================================================
+4.7 Find the first common ancestor of two nodes in a binary tree. 
+class TreeNode{
+	public Integer data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Integer data){
+    	this.data = data;
+    }
+}
+
+public static boolean containNode(TreeNode root, TreeNode node){
+	// Whether node is in the tree with root as the root node
+	if(root == null && node != null) return false;
+
+	if(root == node) return true;
+
+	return containNode(root.leftChild, node) || containNode(root.rightChild, node);
+
+}
+
+public static TreeNode firstCommonAncestor(TreeNode root, TreeNode n1, TreeNode n2){
+    if(root == null) return null;
+
+    if(root == n1 || root == n2) return root;
+
+	TreeNode left = root.leftChild;
+	TreeNode right = root.rightChild;
+
+	if(((containNode(left, n1) && containNode(right, n2))
+	   || (containNode(left, n2) && containNode(right, n1)))
+	      return root;
+
+	if(containNode(left, n1) && containNode(left, n2))
+	   return firstCommonAncestor(left, n1, n2);
+
+	if(containNode(right, n1) && containNode(right, n2))
+	   return firstCommonAncestor(right, n1, n2);
+
+}
+
+=====================================================
+4.8 Decide whether T2 is a subtree of T1
+class TreeNode{
+	public Integer data;
+    public TreeNode leftChild;
+    public TreeNode rightChild;
+    
+    public TreeNode(Integer data){
+    	this.data = data;
+    }
+}
+
+// Check whether two trees are identical
+public static boolean matchTree(TreeNode t1, TreeNode t2){
+	if(t1 == null && t2 == null)
+	   return true;
+
+	if(t1 == null || t2 == null)
+	   return false;
+
+	if(t1.data != t2.data)
+	   return false;
+
+	return matchTree(t1.leftChild, t2.leftChild) && matchTree(t1.rightChild, t2.rightChild);
+}
+
+
+public static boolean isSubTree(TreeNode t1, TreeNode t2){
+	if(t1 == null)
+	   return false;
+
+	if(t1.data == t2.data){
+	   if(matchTree(t1, t2))
+	     return true;
+	}
+
+	return isSubTree(t1.leftChild, t2) || isSubTree(t1.rightChild, t2);
+}
+
+public static boolean subTree(TreeNode root1, TreeNode root2){
+	if(root2 == null)
+	   return true;
+
+	return isSubTree(root1, root2);
+}
+
+=====================================================
+4.9 Print all paths which sum to a given value. The path does not need to start or end at the root or a leaf.
+//Pseduo code
+-Depth first traverse each path
+-Add value to list for each traversed node
+-Traverse list backward to see if any set of nodes sum to the given value. If so, print path
+-Continue on traversing left or right child
+
+// Use ArrayList to save the path before. But it takes more spaces while recursion. Use int array instead.
+public static void printPaths(TreeNode root, int sum, int[] path, int level){
+    // level indicates the level for the current node(root)
+	if(root == null)
+	   return;
+
+    path[level] = root.data;
+    int temp = 0;
+    for(int i=level; i>=0; i--){
+       temp += path[i];
+
+       if(temp == sum) 
+          print(path, i, level);
+    }
+
+	printPaths(root.leftChild, sum, path, level+1);
+	printPaths(root.rightChild, sum, path, level+1);
+}
+
+public static void print(int[] path, int start, int end){
+	for(int i=start; i<=end; i++){
+	   System.out.print(path[i] + "  ");
+	}
+	System.out.println();
+}
+
+public static void pathSum(TreeNode root, int sum){
+	if(root == null)
+	   return ;
+    
+    int depth = depth(root);
+    int[] path = new int[depth];
+	printPaths(root, sum, path, 0);
+}
+
+public static int depth(TreeNode root){
+	if(root == null)
+	   return 0;
+
+	return 1 + Math.max(depth(root.leftChild), depth(root.rightChild));
+}
+
