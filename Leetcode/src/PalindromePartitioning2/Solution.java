@@ -31,6 +31,8 @@ public class Solution {
      * My solution is too long and looks like a shit,
      * There is an elegant way to implement the same idea, see the reference
      * Let me rewrite the code later, maybe in the second iteration >.<
+     * 
+     * To read: http://leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
      */
     public int minCut(String s) {
         pairs = new ArrayList<ArrayList<Integer>>(s.length());
