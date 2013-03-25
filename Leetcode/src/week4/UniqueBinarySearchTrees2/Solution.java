@@ -36,7 +36,7 @@ public class Solution {
 	}
 
     public ArrayList<TreeNode> generateTrees(int n) {
-    	return visit(0, n - 1);
+    	return visit(1, n);
     }
     
     public ArrayList<TreeNode> visit(int s, int t){
@@ -44,7 +44,7 @@ public class Solution {
         if(s > t) {  
         	// 2b test case? expected: [{}], output: [] 
 //        	TreeNode node = new TreeNode(0);
-//        	res.add(node);
+        	res.add(null);
             return res;
         }
     	if(s == t){
