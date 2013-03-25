@@ -25,4 +25,35 @@ public class Solution {
 
 	}
 
+	 //Definition for singly-linked list.
+	public class ListNode {
+	    int val;
+	    ListNode next;
+	    ListNode(int x) {
+	        val = x;
+	        next = null;
+	    }
+	}
+	
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        ListNode node = head, next, tail = null, start, pre = head;
+    	int i = 1;
+    	while(i < m){
+    		i++;
+    		pre = node;
+    		node = node.next;
+    	}
+    	start = node;
+    	while(node != null && i <= n){
+    		i++;
+    		next = node.next;
+    		node.next = tail;
+    		tail = node;
+    		node = next;
+    	}
+    	start.next = node;
+    	if(m != 1)pre.next = tail;
+    	else return tail;
+    	return head;
+    }
 }
