@@ -1,7 +1,7 @@
 /*
- * Binary Tree Level Order Traversal II - Oct 1 '12
+ * Binary Tree Zigzag Level Order Traversal - Sep 29 '12
 
-Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
 
 For example:
 Given binary tree {3,9,20,#,#,15,7},
@@ -12,25 +12,22 @@ Given binary tree {3,9,20,#,#,15,7},
     /  \
    15   7
 
-return its bottom-up level order traversal as:
+return its zigzag level order traversal as:
 
 [
-  [15,7]
-  [9,20],
   [3],
+  [20,9],
+  [15,7]
 ]
 
  */
 
-package BinaryTreeLevelOrderTraversal2;
+package week3.BinaryTreeZigzagLevelOrderTraversal;
 
 import java.util.ArrayList;
 
 public class Solution {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -44,14 +41,17 @@ public class Solution {
 	}
 	
     ArrayList<ArrayList<Integer>> lists;
-    public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
         lists = new ArrayList<ArrayList<Integer>>();
         if(root != null) visit(root, 0);
-        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        for(int i = lists.size() - 1; i >= 0; i--){
-            res.add(lists.get(i));
+        for(int i = 1; i < lists.size(); i = i + 2){
+        	ArrayList<Integer> temp = lists.get(i);
+        	ArrayList<Integer> newList = new ArrayList<Integer>();
+        	for(int j = temp.size() - 1; j >= 0; j--) newList.add(temp.get(j));
+        	temp.clear();
+        	temp.addAll(newList);
         }
-        return res;
+        return lists;
     }
     
     public void visit(TreeNode node, int level){

@@ -23,7 +23,7 @@ Note:
 Bonus points if you could solve it both recursively and iteratively. 
  */
 
-package SymmetricTree;
+package week3.SymmetricTree;
 
 import java.util.LinkedList;
 import java.util.Queue;

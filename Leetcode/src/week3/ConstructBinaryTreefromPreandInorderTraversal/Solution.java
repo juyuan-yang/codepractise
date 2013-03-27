@@ -1,4 +1,4 @@
-package ConstructBinaryTreefromInandPostorderTraversal;
+package week3.ConstructBinaryTreefromPreandInorderTraversal;
 
 public class Solution {
 
@@ -16,23 +16,22 @@ public class Solution {
 		TreeNode right;
 		TreeNode(int x) { val = x; }
 	}
-    int[] postorder, inorder;
-    public TreeNode buildTree(int[] inorder, int[] postorder) {
-        if(postorder == null || inorder == null 
-            || postorder.length != inorder.length) return null;
-        this.postorder = postorder;
+    int[] preorder, inorder;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if(preorder == null || inorder == null 
+            || preorder.length != inorder.length) return null;
+        this.preorder = preorder;
         this.inorder = inorder;
         return buildNode(0, inorder.length - 1, 0, inorder.length - 1);
     }
-
-    // postorder: s1 t1, inorder: s2 t2
+    // preorder: s1 t1, inorder: s2 t2
     public TreeNode buildNode(int s1, int t1, int s2, int t2){
         if(s1 > t1) return null;
-        TreeNode node = new TreeNode(postorder[t1]);
+        TreeNode node = new TreeNode(preorder[s1]);
         for(int i = s2; i <= t2; i++){
-            if(inorder[i] == postorder[t1]){
-                if(s2 < i) node.left = buildNode(s1, i-s2+s1-1, s2,i-1);
-                if(i < t2) node.right = buildNode(t1-t2+i, t1-1, i+1,t2);
+            if(inorder[i] == preorder[s1]){
+                if(s2 < i) node.left = buildNode(s1+1, i-s2+s1, s2,i-1);
+                if(i < t2) node.right = buildNode(t1-t2+i+1, t1, i+1,t2);
                 break;
             }
         }

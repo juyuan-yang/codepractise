@@ -22,7 +22,7 @@ return its level order traversal as:
 
  */
 
-package BinaryTreeLevelOrderTraversal;
+package week3.BinaryTreeLevelOrderTraversal;
 
 import java.util.ArrayList;
 

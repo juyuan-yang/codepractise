@@ -1,21 +1,15 @@
 /*
- * Palindrome Partitioning - Feb 28
+ * Palindrome Partitioning II - Mar 1
 
 Given a string s, partition s such that every substring of the partition is a palindrome.
 
-Return all possible palindrome partitioning of s.
+Return the minimum cuts needed for a palindrome partitioning of s.
 
 For example, given s = "aab",
-Return
-
-  [
-    ["aa","b"],
-    ["a","a","b"]
-  ]
-
+Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut. 
  */
 
-package PalindromePartitioning;
+package week3.PalindromePartitioning2;
 
 import java.util.ArrayList;
 
@@ -25,41 +19,45 @@ public class Solution {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		partition("abcbacddca");
-//		System.out.println(pairs);
+		// TODO Auto-generated method stub
+
 	}
 	
-	ArrayList<ArrayList<String>> res;
-    String[] oneSol;
     ArrayList<ArrayList<Integer>> pairs; // to record [start, end] palindrome pairs
     String s;
     
-    public ArrayList<ArrayList<String>> partition(String s) {
-        res = new ArrayList<ArrayList<String>>();
-        oneSol = new String[200];
+    /*
+     * http://www.mitbbs.com/article_t/JobHunting/32344595.html
+     * My solution is too long and looks like a shit,
+     * There is an elegant way to implement the same idea, see the reference
+     * Let me rewrite the code later, maybe in the second iteration >.<
+     * 
+     * To read: http://leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
+     */
+    public int minCut(String s) {
         pairs = new ArrayList<ArrayList<Integer>>(s.length());
         this.s = s;
         if(s != null || s.length() > 0){
             findAllPairs();
         }
-        findSol(0, 0);
-        return res;
+        return findSol();
     }
-    
-    public void findSol(int start, int num){
-    	if(start == s.length()){
-    		ArrayList<String> sol = new ArrayList<String>();
-    		for(int i = 0; i < num; i++) sol.add(oneSol[i]);
-    		res.add(sol);
-    		return;
+    // res array has s.length + 1 elements
+    // as I need res[0] = 0 as an initial condition
+    // res stores how many palindromes at each index, so the min cut needs -1
+    // DP formula: if there is a palindrome [start, end], then
+    //     res[end] = min{res[end], res[start-1] + 1}
+    public int findSol(){
+        int[] res = new int[s.length() + 1];
+    	for(int i = 0; i <= s.length(); i++) res[i] = i;
+    	for(int i = 0; i < s.length(); i++){
+    		ArrayList<Integer> pair = pairs.get(i);
+    		for(int j = 0; j < pair.size(); j++){
+    			int end = pair.get(j);
+    			if(res[end+1] > res[i]) res[end+1] = res[i]+1;
+    		}
     	}
-    	ArrayList<Integer> pair = pairs.get(start);
-    	for(int i = 0; i < pair.size(); i++){
-    		int end = pair.get(i) + 1;
-    		String temp = s.substring(start, end);
-    		oneSol[num] = temp;
-    		findSol(end, num + 1);
-    	}
+    	return res[s.length()] - 1;
     }
     
     public void findAllPairs(){
