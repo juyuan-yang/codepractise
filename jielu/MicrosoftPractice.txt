@@ -1,0 +1,125 @@
+1. Reverse words in a given string
+//Example: Let the input string be “i like this program very much”. The function should change the string to “much very program this //like i”
+// c/c++ version
+public void reverse(char* start, char* end){
+    char temp;
+	while(start < end){
+	    temp = *start;
+	    *start++ = *end;
+	    *end-- = temp;
+	}
+}
+
+public void reverseWords(char* s){
+	char* begin = NULL;
+	char* temp = s;
+
+	while(*temp){
+	   if(begin==NULL && *temp != ' '){
+	      begin = temp;
+	   }
+
+	   if(begin != NULL && *(temp+1) == ' ' || *(temp+1) == '\0'){
+	      reverse(begin, temp);
+	      begin = NULL;
+	   }
+	   temp ++;
+	}
+
+	reverse(s, temp-1);
+}
+
+// java version
+public static void reverse(char[] array, int start, int end){
+		while(start < end){
+		   char temp = array[start];
+		   array[start++] = array[end];
+		   array[end--] = temp; 
+		}
+	}
+
+	public static String reverseWords(String s){
+		int start = -1;
+		char[] array = s.toCharArray();
+
+		for(int i=0; i<array.length; i++){
+		   if(start == -1 && array[i] != ' '){
+		      start = i;
+		   }
+
+		   if(start != -1 && (i == array.length -1 || array[i+1] == ' ')){
+		      reverse(array, start, i);
+		      start = -1;
+		   }
+		}
+
+		reverse(array, 0, array.length -1);
+		
+		return new String(array);
+
+	}
+
+====================================================================
+2. Remove duplicate words from a string
+public static String removeDuplicateWords(String s){
+	    HashSet<String> wordsSet = new HashSet<String>();
+
+	    char[] array = s.toCharArray();
+	    StringBuilder builder = new StringBuilder();
+	    int start = -1;
+
+	    int length = array.length;
+	    StringBuilder word = new StringBuilder();
+	    for(int i=0; i<length; i++){
+	       if(!(array[i] >= 'a' && array[i] <= 'z')){
+	          builder.append(array[i]);
+	          continue;
+	       }
+
+	       //word starts
+	       if(start == -1 && array[i] != ' '){
+	          start = i;
+	          word = new StringBuilder();
+	       }
+
+	       word.append(array[i]);
+
+	       //word ends
+	       if(start != -1 && (i==length-1 || array[i+1] == ' ')){
+	          String temp = word.toString();
+	          if(!wordsSet.contains(temp)){
+	             builder.append(temp);
+	             wordsSet.add(temp);
+	          }
+	          start = -1;
+	       }
+
+	    }
+
+	    return builder.toString();
+		
+	}
+
+=============================================================
+3. 求最大连续元素的和（o(n))
+public static int maxSum(int[] array){
+	int maxSum = 0;
+	int sum = 0;
+
+	for(int i=0; i<array.length; i++){
+	   sum += array[i];
+
+	   if(sum > maxSum){
+	      maxSum = sum;
+	   }else if(sum < 0){
+	      sum = 0;
+	   }
+
+	}
+
+	return maxSum;
+}
+
+
+
+
