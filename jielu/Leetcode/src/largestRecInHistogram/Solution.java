@@ -11,53 +11,25 @@ import java.util.Stack;
  * return 10.
  * Finished on 3/28/2013
  * @author jielu
- * References for optimized solution: 
- * http://fisherlei.blogspot.com/2012/12/leetcode-largest-rectangle-in-histogram.html
- * http://www.informatik.uni-ulm.de/acm/Locals/2003/html/judge.html
- *
  */
 public class Solution {
-    public static int largestRectangleArea(int[] height) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int length = height.length;
-        if(height == null || length == 0)
-        	return 0;
+	public int largestRectangleArea(int[] height) {
+		// Start typing your Java solution below
+		// DO NOT write main() function
+		int area = 0, i = 0;
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		while(i <= height.length){
+			if(stack.isEmpty() || (i < height.length && height[i] >= height[stack.peek()])){
+				stack.push(i++);
+			}else{
+				int top = stack.pop();
+				area = Math.max(area, height[top] * (stack.isEmpty() ? i : i - stack.peek() -1));
+			}
+		}
+		
+		return area;
 
-        if(length == 1)
-        	return height[0];
+	}
 
-
-        int area = Integer.MIN_VALUE;
-        Stack<Integer> heights = new Stack<Integer>(); /* Heights that are not merged*/
-        Stack<Integer> distances = new Stack<Integer>(); /* Distance from the current height to next available height*/
-
-        heights.push(height[0]);
-        distances.push(1);
-
-        for(int i=1; i<=length; i++){
-        	int curHeight = -1;
-        	if(i < length) curHeight = height[i];
-
-        	if(curHeight >= heights.peek()){
-        		heights.push(curHeight);
-        		distances.push(1);
-        	}else{
-        		int distance = 0;
-        		int minHeight = Integer.MAX_VALUE;
-        		
-        		while(!heights.isEmpty() && heights.peek() >= curHeight){
-        			int top = heights.pop();
-        			minHeight = Math.min(minHeight, top);
-        			distance += distances.pop();
-        			area = Math.max(area, minHeight * distance);
-        		}
-
-        		heights.push(curHeight);
-        		distances.push(distance + 1);
-        	}
-        }
-
-        return area;       
-    }
 }
