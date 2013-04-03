@@ -28,6 +28,7 @@ public class Solution {
         	tail = tail.next;
         	total++;
         }
+        n %= total; // fuck... I forget this situation... >.<
         remain = total - n - 1;
         while(remain > 0){
         	remain --;
