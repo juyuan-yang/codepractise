@@ -1,4 +1,3 @@
 codepractise
 ============
-
-mainly from Leetcode online judge
+code repository for leetcode
