@@ -1,7 +1,5 @@
 package all;
 
-import java.util.ArrayList;
-
 public class tester {
 
 	/**
@@ -21,10 +19,13 @@ public class tester {
 //		System.out.println(s.isNumber("1e.3"));
 //		week6.MaximalRectangle.Solution s = new week6.MaximalRectangle.Solution();
 //		System.out.println(s.maximalRectangle(new char[][]{{'1', '0'}, {'1', '0'}}));
-		week7.MergeIntervals.Solution s = new week7.MergeIntervals.Solution();
-		ArrayList<Interval> list = new ArrayList<Interval>();
-		list.add(new Interval(1, 4));
-		list.add(new Interval(5, 6));
-		s.merge(list);
+//		week7.MergeIntervals.Solution s = new week7.MergeIntervals.Solution();
+//		ArrayList<Interval> list = new ArrayList<Interval>();
+//		list.add(new Interval(1, 4));
+//		list.add(new Interval(5, 6));
+//		s.merge(list);
+		week7.SpiralMatrix.Solution s = new week7.SpiralMatrix.Solution();
+		int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+		System.out.println(s.spiralOrder(matrix));
 	}
 }
