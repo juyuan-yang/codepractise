@@ -76,7 +76,7 @@ public class solution {
 			for (String s : newStrs)
 				visit.put(s, true);
 			toCheck = newStrs;
-			System.out.println(toCheck);
+//			System.out.println(toCheck);
 		}
 		ArrayList<ArrayList<String>> finalRes = new ArrayList<ArrayList<String>>();
 		if (toCheck.contains(end)) {
@@ -84,7 +84,7 @@ public class solution {
 			results[0] = end;
 			visitPath(end, ancestor, results, 1, finalRes);
 		}
-		System.out.println(ancestor);
+//		System.out.println(ancestor);
 		return finalRes;
 	}
 
