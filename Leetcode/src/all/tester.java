@@ -24,8 +24,11 @@ public class tester {
 //		list.add(new Interval(1, 4));
 //		list.add(new Interval(5, 6));
 //		s.merge(list);
-		week7.SpiralMatrix.Solution s = new week7.SpiralMatrix.Solution();
-		int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-		System.out.println(s.spiralOrder(matrix));
+//		week7.SpiralMatrix.Solution s = new week7.SpiralMatrix.Solution();
+//		int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+//		System.out.println(s.spiralOrder(matrix));
+		
+		week7.Pow_x_n.Solution s = new week7.Pow_x_n.Solution();
+		s.pow(-1, -2147483648);
 	}
 }
