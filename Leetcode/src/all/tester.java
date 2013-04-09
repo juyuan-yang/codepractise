@@ -28,7 +28,10 @@ public class tester {
 //		int[][] matrix = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
 //		System.out.println(s.spiralOrder(matrix));
 		
-		week7.Pow_x_n.Solution s = new week7.Pow_x_n.Solution();
-		s.pow(-1, -2147483648);
+//		week7.Pow_x_n.Solution s = new week7.Pow_x_n.Solution();
+//		s.pow(-1, -2147483648);
+		DivideTwoIntegers.Solution s = new DivideTwoIntegers.Solution();
+		s.divide(2147483647, 1);
+		
 	}
 }
