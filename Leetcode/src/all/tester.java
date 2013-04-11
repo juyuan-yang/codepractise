@@ -30,8 +30,9 @@ public class tester {
 		
 //		week7.Pow_x_n.Solution s = new week7.Pow_x_n.Solution();
 //		s.pow(-1, -2147483648);
-		DivideTwoIntegers.Solution s = new DivideTwoIntegers.Solution();
-		s.divide(2147483647, 1);
-		
+//		DivideTwoIntegers.Solution s = new DivideTwoIntegers.Solution();
+//		s.divide(2147483647, 1);
+		week7.MultiplyStrings.Solution s = new week7.MultiplyStrings.Solution();
+		s.multiply("123456789", "987654321");
 	}
 }
