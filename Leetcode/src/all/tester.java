@@ -32,7 +32,12 @@ public class tester {
 //		s.pow(-1, -2147483648);
 //		DivideTwoIntegers.Solution s = new DivideTwoIntegers.Solution();
 //		s.divide(2147483647, 1);
-		week7.MultiplyStrings.Solution s = new week7.MultiplyStrings.Solution();
-		s.multiply("123456789", "987654321");
+
+//		week7.MultiplyStrings.Solution s = new week7.MultiplyStrings.Solution();
+//		s.multiply("123456789", "987654321");
+
+		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
+		System.out.println(s.isMatch("aa", "*"));
+
 	}
 }
