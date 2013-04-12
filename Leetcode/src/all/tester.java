@@ -1,5 +1,7 @@
 package all;
 
+import week7.WildcardMatching.Solution;
+
 public class tester {
 
 	/**
@@ -36,8 +38,9 @@ public class tester {
 //		week7.MultiplyStrings.Solution s = new week7.MultiplyStrings.Solution();
 //		s.multiply("123456789", "987654321");
 
+//		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
+//		System.out.println(s.isMatch("aa", "*"));
 		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
-		System.out.println(s.isMatch("aa", "*"));
-
+		System.out.println(s.isMatch("aa", "*aa"));
 	}
 }
