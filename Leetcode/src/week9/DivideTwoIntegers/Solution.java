@@ -4,17 +4,25 @@
 Divide two integers without using multiplication, division and mod operator. 
  */
 
-package week8.DivideTwoIntegers;
+package week9.DivideTwoIntegers;
 
 //import java.util.Stack;
 
 public class Solution { 
-	// bit operation is amazing!
-	// but how to deal with -Max_Int?
+	// bit operation is amazing! but be careful with Min_Val!!! Rewrite next iteration.
 	public int divide(int dividend, int divisor) {
-		if(divisor > dividend) return 0;
-		boolean neg = (dividend < 0) ^ (divisor < 0);
-		if(dividend < 0) dividend = -dividend;
+		if(divisor == Integer.MIN_VALUE) {
+			if(dividend == Integer.MIN_VALUE) return 1;
+			else return 0;
+		}
+		boolean neg = (dividend < 0) ^ (divisor < 0), minVal = false;
+		if(dividend < 0) {
+			if(dividend == Integer.MIN_VALUE){
+				minVal = true;
+				dividend++;
+			}
+			dividend = -dividend;
+		}
 		if(divisor < 0) divisor = -divisor;
 		int temp = divisor, exp = 1, ans = 0;
 		
@@ -31,6 +39,8 @@ public class Solution {
 			temp = temp >> 1;
 			exp = exp >> 1;
 		}
+		
+		if(minVal && dividend + 1 >= divisor) ans++;
 		
 		if(neg) return -ans;
 		else return ans;
