@@ -12,7 +12,7 @@ Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
  */
 
-package week9.LetterCombinationsofaPhoneNumber;
+package week10.LetterCombinationsofaPhoneNumber;
 
 import java.util.ArrayList;
 
