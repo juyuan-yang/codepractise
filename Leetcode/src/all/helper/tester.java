@@ -1,6 +1,4 @@
-package all;
-
-import week7.WildcardMatching.Solution;
+package all.helper;
 
 public class tester {
 
@@ -40,7 +38,7 @@ public class tester {
 
 //		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
 //		System.out.println(s.isMatch("aa", "*"));
-		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
-		System.out.println(s.isMatch("aa", "*aa"));
+//		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
+
 	}
 }

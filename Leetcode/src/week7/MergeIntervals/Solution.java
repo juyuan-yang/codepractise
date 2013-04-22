@@ -11,7 +11,7 @@ package week7.MergeIntervals;
 
 import java.util.ArrayList;
 
-import all.Interval;
+import all.helper.Interval;
 
 public class Solution {
 	ArrayList<Interval> intervals;

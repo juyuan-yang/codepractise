@@ -1,4 +1,4 @@
-package all;
+package all.helper;
 
 public class Interval {
 	 public int start;

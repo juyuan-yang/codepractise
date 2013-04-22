@@ -6,7 +6,7 @@ The new list should be made by splicing together the nodes of the first two list
 
 package week6.MergeTwoSortedLists;
 
-import all.ListNode;
+import all.helper.ListNode;
 
 public class Solution {
 	

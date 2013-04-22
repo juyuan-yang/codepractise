@@ -17,7 +17,7 @@ package week7.InsertInterval;
 
 import java.util.ArrayList;
 
-import all.Interval;
+import all.helper.Interval;
 
 public class Solution {
     public ArrayList<Interval> insert(ArrayList<Interval> intervals, Interval newInterval) {
