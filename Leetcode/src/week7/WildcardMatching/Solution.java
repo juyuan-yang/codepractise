@@ -35,11 +35,27 @@ public class Solution {
 		this.res = false;
 		int l = 0;
 		
-		while(l < s.length() && l < p.length() && p.charAt(l) != '*'){
+		for(int i = 0; i < p.length(); i++){
+			if(p.charAt(i) == '*'){
+				int l1 = s.length() - 1, l2 = p.length() - 1;
+				while(l1 >= 0 && l2 >= 0 && p.charAt(l2) != '*'){
+					if(s.charAt(l1) != '?' && p.charAt(l2) != '?' 
+							&& s.charAt(l1) != p.charAt(l2)) return false;
+					l1--;
+					l2--;
+				}
+				this.s = s.substring(0, l1+1);
+				this.p = p.substring(0, l2+1);
+				break;
+			}
+		}
+		
+		while(l < this.s.length() && l < this.p.length() && p.charAt(l) != '*'){
 			if(s.charAt(l) == '?' || p.charAt(l) == '?') l++;
 			else if(s.charAt(l) != p.charAt(l)) return false;
 			else l++;
 		}
+
 		visit(l, l);
 		return res;
 	}
