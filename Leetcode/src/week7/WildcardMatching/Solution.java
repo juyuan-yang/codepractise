@@ -78,7 +78,8 @@ public class Solution {
 			}
 			if(t1 == s.length() || t2 == p.length() || p.charAt(t2) == '*'){
 				visit(t1, t2);
-				if(res) return;
+//				if(res) 
+					return;
 			}
 		}
 	}
