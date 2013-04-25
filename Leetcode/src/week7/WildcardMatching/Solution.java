@@ -23,9 +23,7 @@ isMatch("aab", "c*a*b") ? false
 package week7.WildcardMatching;
 
 public class Solution {
-	// Time Limit Exceed: 55555555.....
-	// "abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", 
-	// "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"
+	// Is it codes? No, it's shit...
 	String s, p;
 	boolean res;
 	public boolean isMatch(String s, String p) {
