@@ -1,3 +1,5 @@
+package week11.LongestCommonPrefix;
+
 public class Solution {
     public String longestCommonPrefix(String[] strs) {
         String res = "";
@@ -9,12 +11,12 @@ public class Solution {
                     min = i;
                 }
             }
-            
+
             res = strs[min];
             strs[min] = strs[0];
             length = res.length();
             for(int i = 1; i < strs.length; i++){
-                for(int j = 0; j < res.length(); j++){
+                for(int j = 0; j < res.length() && j < length; j++){
                     if(j == strs[i].length()){
                         length = j;
                         break;
