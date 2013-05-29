@@ -1,6 +1,7 @@
 package week11.LongestCommonPrefix;
 
 public class Solution {
+    // sometimes it will get TimeLimit Exceed in large input tests
     public String longestCommonPrefix(String[] strs) {
         String res = "";
         int length = 0;
