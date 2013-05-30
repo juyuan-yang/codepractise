@@ -1,3 +1,10 @@
+/*
+Roman to Integer - Jan 15 '12 - 1467 / 2990
+Given a roman numeral, convert it to an integer.
+
+Input is guaranteed to be within the range from 1 to 3999.
+ */
+
 package week11.RomanToInteger;
 
 /**

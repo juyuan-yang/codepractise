@@ -1,3 +1,8 @@
+/*
+Longest Common Prefix - Jan 17 '12 - 2510 / 6955
+Write a function to find the longest common prefix string amongst an array of strings.
+ */
+
 package week11.LongestCommonPrefix;
 
 public class Solution {
