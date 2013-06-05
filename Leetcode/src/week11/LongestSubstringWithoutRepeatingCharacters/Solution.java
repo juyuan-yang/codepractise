@@ -17,6 +17,28 @@ package week11.LongestSubstringWithoutRepeatingCharacters;
  */
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        return 0;
+        int max = 0;
+        if(s != null && s.length() > 0){
+            int maxCh = 1, start = 0;
+            for(int i = 0; i < s.length(); i++)
+                if(s.charAt(i) > maxCh) maxCh = s.charAt(i);
+
+            int[] count = new int[maxCh + 1], pre = new int[maxCh + 1];
+            for(int i = 0; i < s.length(); i++){
+                char ch = s.charAt(i);
+                if(count[ch] == 1) {
+                    for(int j = start; j <= pre[ch]; j++){
+                        count[s.charAt(j)]--;
+                    }
+                    start = pre[ch] + 1;
+                }
+                if(count[ch] == 0) {
+                    pre[ch] = i;
+                    count[ch]++;
+                    if(i - start + 1> max) max = i - start + 1;
+                }
+            }
+        }
+        return max;
     }
 }
