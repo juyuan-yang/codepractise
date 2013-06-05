@@ -28,14 +28,14 @@ import java.util.HashSet;
  */
 public class Solution {
     // very tricky solution for me... very interesting!
+    ArrayList<ArrayList<Integer>> res;
     int[] num;
     public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
-        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res = new ArrayList<ArrayList<Integer>>();
         this.num = num;
         if(num == null || num.length < 3) return res;
         quicksort(0, num.length - 1);
-        System.out.println(num);
-        for(int i = 0; i < num.length - 3; i++){
+        for(int i = 0; i <= num.length - 3; i++){
             if(i != 0 && num[i] == num[i-1]) continue;
             int start = i+1, end=num.length-1;
             while(start < end){
@@ -82,6 +82,7 @@ public class Solution {
         if(s < i - 1) quicksort(s, i-1);
         if(i + 1 < t) quicksort(i+1, t);
     }
+
     // time limit exceeds
 //    ArrayList<ArrayList<Integer>> res;
 //    int[] temp;
