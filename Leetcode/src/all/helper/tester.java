@@ -35,9 +35,12 @@ public class tester {
 
 //		week7.MultiplyStrings.Solution s = new week7.MultiplyStrings.Solution();
 //		s.multiply("123456789", "987654321");
-		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
-		System.out.println(s.isMatch("b", "?*?"));
+//		week7.WildcardMatching.Solution s = new week7.WildcardMatching.Solution();
+//		System.out.println(s.isMatch("b", "?*?"));
 				//"abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", 
 				//						"**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"));
+
+        week11.ThreeSum.Solution s = new week11.ThreeSum.Solution();
+        System.out.println(s.threeSum(new int[]{1,-1,-1,0}));
 	}
 }
