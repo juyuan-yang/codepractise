@@ -8,10 +8,7 @@ Return the sum of the three integers. You may assume that each input would have 
     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
  */
 
-package week11.ThreeSumCloest;
-
-import java.util.ArrayList;
-import java.util.HashSet;
+package week11.ThreeSumClosest;
 
 /**
  * Created with IntelliJ IDEA.
