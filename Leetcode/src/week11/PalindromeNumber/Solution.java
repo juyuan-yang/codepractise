@@ -15,17 +15,28 @@ There is a more generic way of solving this problem.
 
 package week11.PalindromeNumber;
 
+// not sure whether this is allowed
 public class Solution {
+    boolean res;
     public boolean isPalindrome(int x) {
-        putInStack(x, x);
-        return false;
+        res = true;
+        if(x <0){
+            return false;
+            //if(x == Integer.MIN_VALUE) return false;
+            //else putInStack(-x, -x);
+        } else
+            putInStack(x, x);
+        return res;
     }
 
-    public int putInStack(int x1, int x2){
+    public int putInStack(int x1, int orig){
         if(x1 > 0){
-            int num = putInStack(x1 / 10, x2);
-            if(x2 % 10 == )
+            int x2 = putInStack(x1 / 10, orig);
+            if(x2 % 10 != x1 % 10){
+                res = false;
+            }
+            return x2 / 10;
         } else
-            return x2;
+            return orig;
     }
 }
