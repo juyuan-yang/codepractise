@@ -4,57 +4,54 @@ import java.util.ArrayList;
 
 public class Solution {
     ArrayList<ArrayList<Integer>> res;
-    int[] array;
-    public ArrayList<ArrayList<Integer>> myMethod(int[] array, int target){
+    int[] num;
+    public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
         res = new ArrayList<ArrayList<Integer>>();
-        this.array = array;
-        quicksort(0, array.length - 1);
-        int start = 0, end = array.length - 1;
-        while(end - start > 2){
-            int s = start + 1, e = end - 1;
-            while(s < e){
-                int total = array[start] + array[s] + array[e] + array[end];
-                if(total == target){
-                    ArrayList<Integer> item = new ArrayList<Integer>();
-                    item.add(array[start]);
-                    item.add(array[s]);
-                    item.add(array[e]);
-                    item.add(array[end]);
-                    res.add(item);
-                    s++;
-                    e--;
-                } else if(total < target){
-                    s++;
-                } else {
-                    e--;
+        if(num == null || num.length < 4) return res;
+        this.num = num;
+        quicksort(0, num.length - 1);
+        for(int start = 0; start <= num.length - 4; start++){
+            for(int end = start + 3; end < num.length; end++){
+                int s = start + 1, e = end - 1;
+                while(s < e){
+                    int total = num[start] + num[s] + num[e] + num[end];
+                    if(total == target){
+                        ArrayList<Integer> item = new ArrayList<Integer>();
+                        item.add(num[start]);
+                        item.add(num[s]);
+                        item.add(num[e]);
+                        item.add(num[end]);
+                        res.add(item);
+                        s++;
+                        e--;
+                    } else if(total < target){
+                        s++;
+                    } else {
+                        e--;
+                    }
                 }
             }
-            do{
-                start++;
-            } while(array[start] == array[start-1] && start < end);
-            do{
-                end--;
-            } while(start < end && array[end] == array[end+1]);
         }
         return res;
     }
 
     public void quicksort(int s, int t) {
         int i = s, j = t;
-        int temp = array[s];
+        int temp = num[s];
 
         while(i < j){
-            while(i < j && array[j] > temp) j--;
+            while(i < j && num[j] > temp) j--;
             if(i < j){
-                array[i] = array[j];
+                num[i] = num[j];
                 i++;
             }
-            while(i < j && array[i] < temp) i++;
+            while(i < j && num[i] < temp) i++;
             if(i < j){
-                array[j] = array[i];
+                num[j] = num[i];
                 j--;
             }
         }
+        num[i] = temp;
 
         if(s < i - 1) quicksort(s, i-1);
         if(i + 1 < t) quicksort(i+1, t);
