@@ -5,13 +5,16 @@ import java.util.ArrayList;
 public class Solution {
     ArrayList<ArrayList<Integer>> res;
     int[] num;
+    // sometimes pass, sometimes time limit exceed, there must be better solution
     public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
         res = new ArrayList<ArrayList<Integer>>();
         if(num == null || num.length < 4) return res;
         this.num = num;
         quicksort(0, num.length - 1);
         for(int start = 0; start <= num.length - 4; start++){
-            for(int end = start + 3; end < num.length; end++){
+            if(start != 0 && num[start] == num[start-1]) continue;
+            for(int end = num.length-1; end > start + 2; end--){
+                if(end != num.length-1 && num[end] == num[end+1]) continue;
                 int s = start + 1, e = end - 1;
                 while(s < e){
                     int total = num[start] + num[s] + num[e] + num[end];
@@ -22,12 +25,20 @@ public class Solution {
                         item.add(num[e]);
                         item.add(num[end]);
                         res.add(item);
-                        s++;
-                        e--;
+                        do{
+                            s++;
+                        } while(s < e && num[s] == num[s-1]);
+                        do{
+                            e--;
+                        } while (s < e && num[e] == num[e+1]);
                     } else if(total < target){
-                        s++;
+                        do{
+                            s++;
+                        } while(s < e && num[s] == num[s-1]);
                     } else {
-                        e--;
+                        do{
+                            e--;
+                        } while(s < e && num[e] == num[e+1]);
                     }
                 }
             }
