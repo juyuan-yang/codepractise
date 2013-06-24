@@ -6,15 +6,8 @@ Find two lines, which together with x-axis forms a container, such that the cont
 
 Note: You may not slant the container.
  */
-package week11.ContainerWithMostWater;
+package week12.ContainerWithMostWater;
 
-/**
- * Created with IntelliJ IDEA.
- * User: juyuan.yang
- * Date: 6/3/13
- * Time: 7:10 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Solution {
     public int maxArea(int[] height) {
 

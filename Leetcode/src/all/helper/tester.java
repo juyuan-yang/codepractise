@@ -40,7 +40,7 @@ public class tester {
 				//"abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", 
 				//						"**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb"));
 
-        week11.ThreeSum.Solution s = new week11.ThreeSum.Solution();
-        System.out.println(s.threeSum(new int[]{1,-1,-1,0}));
+        week11.LongestSubstringWithoutRepeatingCharacters.Solution s = new week11.LongestSubstringWithoutRepeatingCharacters.Solution();
+        System.out.println(s.lengthOfLongestSubstring("bbbbb"));
 	}
 }

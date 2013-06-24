@@ -24,7 +24,7 @@ or if no such sequence exists because either str is empty or it contains only wh
 If no valid conversion could be performed, a zero value is returned.
 If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
  */
-package week11.StringToInt;
+package week12.StringToInt;
 
 /**
  * Created with IntelliJ IDEA.
