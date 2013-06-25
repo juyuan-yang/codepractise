@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
-
+    // time limit exceed
     public int maxArea(int[] height) {
         if(height == null || height.length == 0) return 0;
         List<Integer> increase = new ArrayList<Integer>();
@@ -24,7 +24,7 @@ public class Solution {
             for(int j = 0; j < increase.size(); j++){
                 temp = getMin(height[i], height[increase.get(j)]) * (i - increase.get(j));
                 if(temp > max) max = temp;
-                if(height[i] > height[increase.get(j)]) break;
+                if(height[i] < height[increase.get(j)]) break;
                 if(height[lastIndex] * (i - increase.get(j)) < max) break;
             }
             if(height[lastIndex] < height[i]){
