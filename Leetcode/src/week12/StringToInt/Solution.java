@@ -26,13 +26,6 @@ If the correct value is out of the range of representable values, INT_MAX (21474
  */
 package week12.StringToInt;
 
-/**
- * Created with IntelliJ IDEA.
- * User: juyuan.yang
- * Date: 5/30/13
- * Time: 8:57 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Solution {
     /*
     My consideration:
