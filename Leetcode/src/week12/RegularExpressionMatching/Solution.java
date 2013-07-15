@@ -24,6 +24,8 @@ isMatch("aab", "c*a*b") ? true
 package week12.RegularExpressionMatching;
 
 public class Solution {
+    // learn from here http://blog.csdn.net/hopeztm/article/details/7992253
+    // should learn a lesson from this problem, I always think it too complicated
     public boolean isMatch(String s, String p) {
         if(p == null && s == null) return true;
         else if(p == null) return false;
@@ -45,7 +47,7 @@ public class Solution {
             return sIndex == s.length();
         }
 
-        if(pIndex + 1 < p.length() && p.charAt(pIndex + 1) != '*') {
+        if((pIndex + 1 == p.length()) || (pIndex + 1 < p.length() && p.charAt(pIndex + 1) != '*')) {
             if(sIndex == s.length()) return false;
             if(p.charAt(pIndex) == s.charAt(sIndex) || p.charAt(pIndex) == '.'){
                 return internalIsMatch(s, p, sIndex+1, pIndex+1);
