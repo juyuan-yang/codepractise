@@ -49,6 +49,8 @@ public class Solution {
         	str = str.substring(1);
         	if(str.isEmpty()) return 0;
         	if(biggerThanMaxInt(str)) return Integer.MAX_VALUE; // will also check for equal
+        } else {
+            if(biggerThanMaxInt(str)) return Integer.MAX_VALUE;
         }
         
         int res = 0;
@@ -64,7 +66,7 @@ public class Solution {
     	String max = String.valueOf(Integer.MAX_VALUE);
     	if(str.length() > max.length()) return true;
     	else if(str.length() == max.length()){
-    		for(int i = max.length() - 1; i >= 0; i--){
+    		for(int i = 0; i < max.length(); i++){
     			if(str.charAt(i) > max.charAt(i)) return true;
     			else if(str.charAt(i) < max.charAt(i)) return false;
     		}
@@ -77,7 +79,7 @@ public class Solution {
     	String min = String.valueOf(Integer.MIN_VALUE);
     	if(str.length() > min.length()) return true;
     	else if(str.length() == min.length()){
-    		for(int i = min.length(); i >= 0; i--){
+    		for(int i = 0; i < min.length(); i++){
     			if(str.charAt(i) > min.charAt(i)) return true;
     			else if(str.charAt(i) < min.charAt(i)) return false;
     		}
@@ -100,7 +102,7 @@ public class Solution {
     	}
     	return sb.toString();
     }
-    
+
     public boolean isNum(char ch){
     	return ch >= '0' && ch <= '9';
     }
