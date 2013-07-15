@@ -25,6 +25,41 @@ package week12.RegularExpressionMatching;
 
 public class Solution {
     public boolean isMatch(String s, String p) {
-        return false;
+        if(p == null && s == null) return true;
+        else if(p == null) return false;
+        else if(s == null) {
+            if(p.length() == 0) return true;
+            else if(p.length() == 1){ // assume p could not be "*"
+                if(p.charAt(0) == '.') return true;
+                else return false;
+            } else if(p.length() == 2) {
+                if(p.charAt(1) == '*') return true;
+                else return false;
+            }
+        }
+        return internalIsMatch(s, p, 0, 0);
+    }
+
+    public boolean internalIsMatch(String s, String p, int sIndex, int pIndex) {
+        if(pIndex == p.length()) {
+            return sIndex == s.length();
+        }
+
+        if(pIndex + 1 < p.length() && p.charAt(pIndex + 1) != '*') {
+            if(sIndex == s.length()) return false;
+            if(p.charAt(pIndex) == s.charAt(sIndex) || p.charAt(pIndex) == '.'){
+                return internalIsMatch(s, p, sIndex+1, pIndex+1);
+            } else {
+                return false;
+            }
+        } else {
+            while(sIndex < s.length() && (s.charAt(sIndex) == p.charAt(pIndex) || p.charAt(pIndex) == '.')){
+                if(internalIsMatch(s, p, sIndex, pIndex+2)){
+                    return true;
+                }
+                sIndex++;
+            }
+            return internalIsMatch(s, p, sIndex, pIndex+2);
+        }
     }
 }
