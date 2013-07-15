@@ -17,9 +17,7 @@ package week12.SubstringwithConcatenationofAllWords;
 import java.util.*;
 
 public class Solution {
-    boolean[] appear;
-    Map<Integer, ArrayList<Integer>> map;
-    Set<Integer> set;
+    Map<String, Integer> word2count;
     ArrayList<Integer> res;
     String S;
     String[] L;
@@ -31,51 +29,99 @@ public class Solution {
         this.S = S;
         this.L = L;
 
-        appear = new boolean[L.length];
-        // index of S, to words starting at this postion
-        map = new HashMap<Integer, ArrayList<Integer>>();
-        set = new HashSet<Integer>();
-
-        for(int i = 0; i < S.length(); i++){
-            ArrayList<Integer> list = new ArrayList<Integer>();
-            map.put(i, list);
-        }
+        word2count = new HashMap<String, Integer>();
 
         for(int i = 0; i < L.length; i++){
-            if(i > 0 && L[i].equals(L[i-1])){
-                map.put(i, map.get(i-1));
-                continue;
-            }
-            int index = S.indexOf(L[i]);
-            while(index != -1){
-                map.get(index).add(i);
-                index = S.indexOf(L[i], index + L[i].length());
+            if(word2count.containsKey(L[i])){
+                word2count.put(L[i], word2count.get(L[i]) + 1);
+            } else {
+                word2count.put(L[i], 1);
             }
         }
 
         for(int i = 0; i <= S.length() - L.length * L[0].length(); i++){
-            if(map.get(i).size() > 0){
-                iter(0, i);
-            }
+            tryNextWord(0, i);
         }
 
-        res.addAll(set);
         return res;
     }
 
-    public void iter(int total, int strIndex){
+    public void tryNextWord(int total, int strIndex) {
         if(total == L.length){
-            set.add(strIndex - L.length * L[0].length());
+            res.add(strIndex - L.length * L[0].length());
             return;
         }
-        Set<String> dup = new HashSet<String>();
-        for(int index : map.get(strIndex)){
-            if(!appear[index] && !dup.contains(L[index])){
-                appear[index] = true;
-                iter(total + 1, strIndex + L[index].length());
-                appear[index] = false;
-                dup.add(L[index]);
+        String temp = S.substring(strIndex, strIndex + L[0].length());
+        if(word2count.containsKey(temp)){
+            int count = word2count.get(temp);
+            if(count > 0){
+                word2count.put(temp, count - 1);
+                tryNextWord(total + 1, strIndex + L[0].length());
+                word2count.put(temp, count);
             }
         }
     }
+
+    // Time limit exceed
+//    boolean[] appear;
+//    Map<Integer, ArrayList<Integer>> map;
+//    Set<Integer> set;
+//    ArrayList<Integer> res;
+//    String S;
+//    String[] L;
+//
+//    public ArrayList<Integer> findSubstring(String S, String[] L) {
+//        res = new ArrayList<Integer>();
+//        if(S == null || S.length() == 0) return res;
+//        if(L == null || L.length == 0) return res;
+//        this.S = S;
+//        this.L = L;
+//
+//        appear = new boolean[L.length];
+//        // index of S, to words starting at this postion
+//        map = new HashMap<Integer, ArrayList<Integer>>();
+//        set = new HashSet<Integer>();
+//
+//        for(int i = 0; i < S.length(); i++){
+//            ArrayList<Integer> list = new ArrayList<Integer>();
+//            map.put(i, list);
+//        }
+//
+//        for(int i = 0; i < L.length; i++){
+//            if(i > 0 && L[i].equals(L[i-1])){
+//                map.put(i, map.get(i-1));
+//                continue;
+//            }
+//            int index = S.indexOf(L[i]);
+//            while(index != -1){
+//                map.get(index).add(i);
+//                index = S.indexOf(L[i], index + L[i].length());
+//            }
+//        }
+//
+//        for(int i = 0; i <= S.length() - L.length * L[0].length(); i++){
+//            if(map.get(i).size() > 0){
+//                iter(0, i);
+//            }
+//        }
+//
+//        res.addAll(set);
+//        return res;
+//    }
+//
+//    public void iter(int total, int strIndex){
+//        if(total == L.length){
+//            set.add(strIndex - L.length * L[0].length());
+//            return;
+//        }
+//        Set<String> dup = new HashSet<String>();
+//        for(int index : map.get(strIndex)){
+//            if(!appear[index] && !dup.contains(L[index])){
+//                appear[index] = true;
+//                iter(total + 1, strIndex + L[index].length());
+//                appear[index] = false;
+//                dup.add(L[index]);
+//            }
+//        }
+//    }
 }
