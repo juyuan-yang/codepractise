@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.PrintWriter;
 
-import codejam15.qual.problemc.Solution;
+import codejam13.qual.problemc.Solution;
 
 public class tester {
 	public static void main(String[] args) {
